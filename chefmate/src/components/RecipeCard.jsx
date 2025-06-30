@@ -3,20 +3,25 @@ import { Link } from 'react-router-dom';
 import ServingSizeInput from './ServingSizeInput';
 
 const RecipeCard = ({ recipe }) => {
+  const [imageLoaded, setImageLoaded] = useState(true);
   const [servings, setServings] = useState(recipe.servings);
+
   const factor = useMemo(
     () => servings / recipe.servings,
     [servings, recipe.servings]
   );
 
+  if (!imageLoaded) return null;
+
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm mx-auto flex flex-col">
+    <div className="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm mx-auto flex flex-col hover:shadow-xl transition-shadow">
       <Link to={`/recipe/${recipe.id}`}>
         <div className="h-48 w-full overflow-hidden">
           <img
             src={recipe.image}
             alt={recipe.title}
             className="w-full h-full object-cover"
+            onError={() => setImageLoaded(false)}
           />
         </div>
       </Link>
@@ -33,7 +38,7 @@ const RecipeCard = ({ recipe }) => {
             <ServingSizeInput servings={servings} onChange={setServings} />
           </div>
 
-          {/* <div className="mt-3">
+          <div className="mt-3">
             <h3 className="font-semibold">Ingredients</h3>
             <ul className="list-disc list-inside text-sm">
               {recipe.ingredients.map((ing, idx) => (
@@ -42,7 +47,7 @@ const RecipeCard = ({ recipe }) => {
                 </li>
               ))}
             </ul>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
