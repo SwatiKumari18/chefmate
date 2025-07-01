@@ -13,7 +13,7 @@ const Header = () => {
           />
           ChefMate
         </h1>
-        <p className="text-md text-gray-300">
+        <p className="text-md text-gray-300 hidden sm:block">
           Discover smart recipes for your lifestyle
         </p>
       </div>

@@ -44,7 +44,10 @@ const Home = () => {
       <Header />
       <div className="p-4 max-w-6xl mx-auto">
         <SearchBar onSearch={setQuery} />
+
+        <br></br>
         <FilterPanel dietFilter={dietFilter} onChange={setDietFilter} />
+        <br></br>
 
         {loading && <LoadingSpinner />}
 
